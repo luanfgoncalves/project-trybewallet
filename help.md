@@ -3,7 +3,7 @@ Este arquivo contém todo tipo de auxilo ao desenvolvimento deste projeto.
 -- Repositórios remotos --
 
   https://github.com/tryber/sd-022-b-project-trybewallet  (Projeto)
-  https://github.com/tryber/sd-022-b-project-trybewallet/pull/??  (Meu pull)
+  https://github.com/tryber/sd-022-b-project-trybewallet/pull/19  (Meu pull)
 
 -- Linter --
 
@@ -29,7 +29,7 @@ Este arquivo contém todo tipo de auxilo ao desenvolvimento deste projeto.
   npm run test-coverage
   
   npm run test-coverage -- --collectCoverageFrom=src/pages/Login.js
-  npm run test-coverage -- --collectCoverageFrom=src/pages/Login.js
+  npm run test-coverage -- --collectCoverageFrom=src/pages/Wallet.js
   npm run test-coverage -- --collectCoverageFrom=src/pages/Login.js
   npm run test-coverage -- --collectCoverageFrom=src/pages/Login.js
   npm run test-coverage -- --collectCoverageFrom=src/pages/Login.js

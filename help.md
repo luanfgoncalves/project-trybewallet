@@ -15,14 +15,15 @@ Este arquivo contém todo tipo de auxilo ao desenvolvimento deste projeto.
   npm run cy
   npm run cy:open
   
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
-  npm run cy -- --spec cypress/integration/nomeDoArquivo_spec.js
+  npm run cy -- --spec cypress/integration/01.LoginPage_spec.js
+  npm run cy -- --spec cypress/integration/02.Header_spec.js
+  npm run cy -- --spec cypress/integration/03.ExpensesForm_spec.js
+  npm run cy -- --spec cypress/integration/04.SaveExpensesForm_spec.js
+  npm run cy -- --spec cypress/integration/05.TestCoverage_spec.js
+  npm run cy -- --spec cypress/integration/06.ExpensesTable_spec.js
+  npm run cy -- --spec cypress/integration/07.ExpenseGlobalState_spec.js
+  npm run cy -- --spec cypress/integration/09.DeleteExpense_spec.js
+  npm run cy -- --spec cypress/integration/10.TestCoverage_spec.js
   
 -- Testes de cobertura --
 

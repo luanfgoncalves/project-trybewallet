@@ -14,15 +14,11 @@ class LoginForm extends Component {
   }
 
   handleChange = ({ target }) => {
-    const NUM = 6; // só existe para evitar o problema de número magico
-    const { email, password } = this.state;
     const { name, value } = target;
-    this.setState({ [name]: value });
-    if (this.validateEmail(email) && password.length >= NUM) {
-      this.setState({ isLoginDisabled: false });
-    }
-    this.setState({ isLoginDisabled: true });
-  }
+    this.setState({ [name]: value }, () => {
+      this.validateLogin();
+    });
+  };
 
   handleCLick = () => {
     const { history, saveUser } = this.props;
@@ -32,9 +28,14 @@ class LoginForm extends Component {
     history.push('/carteira');
   }
 
-  validateEmail(email) {
-    // return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
-    return /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i.test(email);
+  validateLogin = () => {
+    const { email, password } = this.state;
+    const spec = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i;
+    const NUM = 5; // só existe para evitar o problema de número magico
+    if (spec.test(email) && password.length > NUM) {
+      return this.setState({ isLoginDisabled: false });
+    }
+    return this.setState({ isLoginDisabled: true });
   }
 
   render() {
@@ -92,7 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 LoginForm.propTypes = {
-  history: PropTypes.shape,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }),
   saveUser: PropTypes.func,
 }.isRequired;
 

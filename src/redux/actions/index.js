@@ -3,7 +3,7 @@
 
 const saveUserAction = (email) => ({
   type: 'SET_USER_DATA',
-  payload: email,
+  email,
 });
 
 export default saveUserAction;

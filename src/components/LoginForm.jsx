@@ -14,21 +14,27 @@ class LoginForm extends Component {
   }
 
   handleChange = ({ target }) => {
-    const NUM = 5; // só existe para evitar o problema de número magico
+    const NUM = 6; // só existe para evitar o problema de número magico
     const { email, password } = this.state;
     const { name, value } = target;
     this.setState({ [name]: value });
-    if (email.length > 0 && password.length > NUM) {
+    if (this.validateEmail(email) && password.length >= NUM) {
       this.setState({ isLoginDisabled: false });
-    } else {
-      this.setState({ isLoginDisabled: true });
     }
+    this.setState({ isLoginDisabled: true });
   }
 
   handleCLick = () => {
-    const { history } = this.props;
-    this.setState({});
+    const { history, saveUser } = this.props;
+    const { email } = this.state;
+    // event.preventDefault();
+    saveUser(email);
     history.push('/carteira');
+  }
+
+  validateEmail(email) {
+    // return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
+    return /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i.test(email);
   }
 
   render() {
@@ -46,6 +52,7 @@ class LoginForm extends Component {
             data-testid="email-input"
             onChange={ this.handleChange }
             value={ email }
+            required
           />
         </label>
 
@@ -59,12 +66,14 @@ class LoginForm extends Component {
             data-testid="password-input"
             onChange={ this.handleChange }
             value={ password }
+            required
             autoComplete="on" // está aqui pra corrigir o aviso no console
           />
         </label>
 
         <button
           type="submit"
+          data-testid="login-submit-button"
           disabled={ isLoginDisabled }
           onClick={ this.handleCLick }
         >
@@ -83,9 +92,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 LoginForm.propTypes = {
-  history: PropTypes.string,
+  history: PropTypes.shape,
+  saveUser: PropTypes.func,
 }.isRequired;
 
 export default connect(null, mapDispatchToProps)(LoginForm);
 
-// Referência: https://react-redux.js.org/using-react-redux/connect-mapdispatch
+// Referências:
+// https://react-redux.js.org/using-react-redux/connect-mapdispatch
+//

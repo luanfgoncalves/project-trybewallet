@@ -11,5 +11,8 @@ const store = createStore(
 );
 
 // no futuro tem um if
+if (window.Cypress) {
+  window.store = store;
+}
 
 export default store;

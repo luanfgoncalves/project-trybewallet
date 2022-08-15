@@ -3,7 +3,7 @@ import React from 'react';
 // import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; // tem que ser lowerCase
-import saveUserAction from '../redux/actions';
+import { saveUserAction } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {

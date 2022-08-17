@@ -41,7 +41,6 @@
 }
 
 /* --- Meu CSS --- */
-
 * {
   font-family: Roboto , Epilogue , sans-serif;
   margin: 0;
@@ -49,7 +48,8 @@
 }
 
 body {
-  background: linear-gradient(45deg, rgba(226, 223, 223, 0.87) 0%, rgba(4, 200, 148, 9) 100%);
+  background: linear-gradient(45deg, rgba(226, 223, 223, 0.87) 0%
+  rgba(4, 200, 148, 9) 100%);
   background-color: transparent;
   height: 100vh;
   width: 100vw;

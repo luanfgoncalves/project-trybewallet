@@ -49,13 +49,37 @@ describe('Testes relativos ao componente Login.js', () => {
 
     userEvent.type(password, 'teste');
 
-    expect(loginBtn.disabled).toBeTruthy();
+    expect(loginBtn).not.toBeEnabled();
 
     userEvent.type(email, 'teste@gmail.com');
 
     userEvent.type(password, 'teste123');
 
-    expect(loginBtn.disabled).toBeFalsy();
+    expect(loginBtn).toBeEnabled();
+  });
+
+  test('se a rota especificada está correta', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/');
+  });
+
+  test('se o susúario ṕe redirecionado para a rota correta ao fazer login', async () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    const email = screen.getByTestId('email-input');
+    const password = screen.getByTestId('password-input');
+    const loginBtn = screen.getByRole('button', { name: /entrar/i });
+
+    userEvent.type(email, 'teste@gmail.com');
+    userEvent.type(password, 'teste123');
+    userEvent.click(loginBtn)
+
+    await waitFor(() => {
+    expect(history.location.pathname).toBe('/carteira');
+    })
   });
 
 });

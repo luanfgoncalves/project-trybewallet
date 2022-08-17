@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   expenses: [],
   editor: false,
   idToEdit: 0,
+  total: 0,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -13,9 +14,24 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       currencies: action.currencies };
+  case 'HANDLE_EXPENSES':
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses,
+        { id: state.expenses.length, ...action.expense },
+      ],
+    };
+  case 'SET_TOTAL':
+    return {
+      ...state,
+      total: (Number(state.total) + action.total).toFixed(2),
+    };
   default:
     return state;
   }
 };
 
 export default wallet;
+
+// Referêcia: https://www.w3schools.com/jsref/jsref_tofixed.asp

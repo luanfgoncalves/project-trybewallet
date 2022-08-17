@@ -2,24 +2,29 @@ import React, { Component } from 'react';
 // import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { recoverCurrencies } from '../redux/actions/index';
+import { getCurrencies, setExpense } from '../redux/actions/index';
+
+// const INITIAL_TAG = 'Alimentação';
 
 class WalletForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      value: '0',
+      value: '',
+      description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      description: '',
+      // tag: INITIAL_TAG,
+      // description: '',
+      // total: 0,
     };
   }
 
   componentDidMount() {
-    const { dispatchCurrency } = this.props;
-    dispatchCurrency();
+    const { dispatchCurrencies } = this.props;
+    dispatchCurrencies();
   }
 
   handleChange = ({ target }) => {
@@ -27,100 +32,112 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   };
 
+  handleCLick = () => {
+    const { value, description, currency, method, tag } = this.state;
+    const { dispatchExpenses } = this.props;
+    dispatchExpenses({ value, description, currency, method, tag });
+    this.setState({ value: '', description: '' });
+  }
+
+  // resetState = () => {
+  //   this.setState({
+  //     value: '',
+  //     description: '',
+  //     currency: 'USD',
+  //     method: 'Dinheiro',
+  //     tag: 'INITIAL_TAG',
+  //     // total: 0,
+  //   });
+  // }
+
   render() {
     const { currencies } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
-      <div>
-        {currencies && (
-          <form>
+      <form className="wallet-form">
 
-            <label htmlFor="value">
-              <input
-                type="number"
-                name="value"
-                id="value"
-                data-testid="value-input"
-                value={ value }
-                onChange={ this.handleChange }
-              />
-            </label>
+        <label htmlFor="value">
+          <input
+            type="number"
+            name="value"
+            id="value"
+            data-testid="value-input"
+            value={ value }
+            onChange={ this.handleChange }
+          />
+        </label>
 
-            <label htmlFor="description">
-              <input
-                type="text"
-                name="description"
-                id="description"
-                data-testid="description-input"
-                value={ description }
-                onChange={ this.handleChange }
-              />
-            </label>
+        <label htmlFor="description">
+          <input
+            type="text"
+            name="description"
+            id="description"
+            data-testid="description-input"
+            value={ description }
+            onChange={ this.handleChange }
+          />
+        </label>
 
-            <select
-              data-testid="currency-input"
-              name="currency"
-              value={ currency }
-              onChange={ this.handleChange }
-            >
-              {currencies.map((currencyData) => (
-                <option key={ currencyData }>
-                  {currencyData}
-                </option>
-              ))}
-            </select>
+        <select
+          data-testid="currency-input"
+          name="currency"
+          value={ currency }
+          onChange={ this.handleChange }
+        >
+          {currencies.map((currenciesElement) => (
+            <option key={ currenciesElement }>{currenciesElement}</option>
+          ))}
+        </select>
 
-            <select
-              data-testid="method-input"
-              name="method"
-              value={ method }
-              onChange={ this.handleChange }
-            >
-              <option value="dinheiro">
-                Dinheiro
-              </option>
-              <option value="credito">
-                Cartão de crédito
-              </option>
-              <option value="debito">
-                Cartão de débito
-              </option>
-            </select>
+        <select
+          data-testid="method-input"
+          name="method"
+          value={ method }
+          onChange={ this.handleChange }
+        >
+          <option>
+            Dinheiro
+          </option>
+          <option>
+            Cartão de crédito
+          </option>
+          <option>
+            Cartão de débito
+          </option>
+        </select>
 
-            <select
-              data-testid="tag-input"
-              name="tag"
-              value={ tag }
-              onChange={ this.handleChange }
-            >
-              <option value="alimentacao">
-                Alimentação
-              </option>
-              <option value="lazer">
-                Lazer
-              </option>
-              <option value="trabalho">
-                Trabalho
-              </option>
-              <option value="transporte">
-                Transporte
-              </option>
-              <option value="saude">
-                Saúde
-              </option>
-            </select>
+        <select
+          data-testid="tag-input"
+          name="tag"
+          value={ tag }
+          onChange={ this.handleChange }
+        >
+          <option>
+            Alimentação
+          </option>
+          <option>
+            Lazer
+          </option>
+          <option>
+            Trabalho
+          </option>
+          <option>
+            Transporte
+          </option>
+          <option>
+            Saúde
+          </option>
+        </select>
 
-            <button
-              type="submit"
-              onClick={ this.setExpense }
-            >
-              Adicionar despesa
-            </button>
+        <button
+          type="button"
+          onClick={ this.handleCLick }
+        >
+          Adicionar despesa
+        </button>
 
-          </form>
-        ) }
+      </form>
 
-      </div>
     );
   }
 }
@@ -130,13 +147,17 @@ const mapStateToProps = (globalState) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchCurrency: () => dispatch(recoverCurrencies()),
+  dispatchCurrencies: () => dispatch(getCurrencies()),
+  dispatchExpenses: (expense) => dispatch(setExpense(expense)),
 });
 
 WalletForm.propTypes = {
-  dispatchCurrency: PropTypes.func.isRequired,
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+  currencies: PropTypes.func,
+  dispatchCurrencies: PropTypes.func,
+  dispatchExpenses: PropTypes.func,
+}.isRequired;
 
 // export default WalletForm;
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
+
+// referencia: https://stackoverflow.com/questions/49972382/dispatch-is-not-defined-no-undef

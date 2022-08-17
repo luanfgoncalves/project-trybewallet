@@ -4,19 +4,22 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { email } = this.props;
+    const { email, total } = this.props;
     return (
       <div>
-        <p>Header</p>
-        <div data-testid="email-field">
+
+        <span data-testid="email-field">
           { email }
-        </div>
-        <div data-testid="total-field">
-          0
-        </div>
-        <div data-testid="header-currency-field">
-          campo de câmbio(BRL)
-        </div>
+        </span>
+
+        <span data-testid="total-field">
+          { total }
+        </span>
+
+        <span data-testid="header-currency-field">
+          BRL
+        </span>
+
       </div>
     );
   }
@@ -24,10 +27,18 @@ class Header extends Component {
 
 const mapStateToProps = (globalState) => ({
   email: globalState.user.email,
+  total: globalState.wallet.total,
 });
 
 Header.propTypes = {
-  email: PropTypes.string.isRequired,
-};
+  email: PropTypes.string,
+  total: PropTypes.string,
+}.isRequired;
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps)(Header);
+
+// Organização
+// 1- recuperar via props as expenses
+// 2-
+//
+//

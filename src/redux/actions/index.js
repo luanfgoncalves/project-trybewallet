@@ -76,3 +76,10 @@ export const setExpense = (expense) => async (dispatch) => {
 
 // referencias:
 // https://www.codingem.com/javascript-user-input/
+
+// ---- Remoção de despesas - REQ 8----
+
+export const deleteExpense = (deleted) => ({
+  type: 'DELETE',
+  deleted,
+});

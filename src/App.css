@@ -41,7 +41,8 @@
 }
 
 /* --- Meu CSS --- */
-* {
+
+/* * {
   font-family: Roboto , Epilogue , sans-serif;
   margin: 0;
   padding: 0;
@@ -53,7 +54,7 @@ body {
   background-color: transparent;
   height: 100vh;
   width: 100vw;
-}
+} */
 
 /* select {} */
 
@@ -62,7 +63,7 @@ body {
   flex-direction: row;
 } */
 
-.login-form {
+/* .login-form {
   display: flex;
   flex-direction: column;
 }
@@ -103,4 +104,4 @@ button:disabled {
   color: black;
   cursor: wait;
   opacity: 0.5;
-}
+} */

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { getCurrencies, setExpense } from '../redux/actions/index';
 
 // const INITIAL_TAG = 'Alimentação';

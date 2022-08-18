@@ -10,11 +10,16 @@ const INITIAL_STATE = {
 
 // --- funções de delete - REQ 8 ---
 // const filterDeleted = state.expenses.filter((e) => e.id === Number(action.deleted));
-// const fValue = filterDeleted[0].value;
+// const filteredValue = filterDeleted[0].value;
 // const fCurrency = filterDeleted[0].currency;
 // ---
 
 const wallet = (state = INITIAL_STATE, action) => {
+  // --- funções de delete - REQ 8 ---
+  const fDeleted = state.expenses.filter((e) => e.id === Number(action.deleted));
+  // const fValue = filterDeleted[0].value;
+  // const fCurrency = filterDeleted[0].currency;
+  // ---
   switch (action.type) {
   case 'SET_CURRENCIES':
     return {
@@ -37,9 +42,9 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((e) => e.id !== Number(action.deleted)),
-      // total: (Number(state.total) - ((+fValue)
-      // * (+filterDeleted[0].exchangeRates[fCurrency].ask))
-      //   .toFixed(2)).toFixed(2),
+      total: (Number(state.total) - ((+fDeleted[0].value)
+      * (+fDeleted[0].exchangeRates[fDeleted[0].currency].ask))
+        .toFixed(2)).toFixed(2),
     };
   default:
     return state;

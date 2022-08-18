@@ -1,18 +1,18 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 
 describe('Testes relativos ao componente Login.js', () => {
 
-  test('se o texto /TrybeWallet/ é renderizado', () => {
-    renderWithRouterAndRedux(<App />);
+  // test('se o texto /TrybeWallet/ é renderizado', () => {
+  //   renderWithRouterAndRedux(<App />);
 
-    const title = screen.getByRole('heading', { name: /trybewallet/i, level: 2 });
+  //   const title = screen.getByRole('heading', { name: /trybewallet/i, level: 2 });
 
-    expect(title).toBeInTheDocument();
-  });
+  //   expect(title).toBeInTheDocument();
+  // });
 
   test('se o input de email é renderizado', () => {
     renderWithRouterAndRedux(<App />);

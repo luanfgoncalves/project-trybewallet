@@ -37,13 +37,13 @@ class Table extends Component {
             <tbody key={ element.id }>
 
               <tr>
-                <td>{element.description}</td>
-                <td>{element.tag}</td>
-                <td>{element.method}</td>
-                <td>{Number(element.value).toFixed(2)}</td>
-                <td>{coin.name}</td>
-                <td>{(Math.round(coin.ask * 100) / 100).toFixed(2)}</td>
-                <td>{(element.value * coin.ask).toFixed(2)}</td>
+                <td data-testid="td1">{element.description}</td>
+                <td data-testid="td2">{element.tag}</td>
+                <td data-testid="td3">{element.method}</td>
+                <td data-testid="td4">{Number(element.value).toFixed(2)}</td>
+                <td data-testid="td5">{coin.name}</td>
+                <td data-testid="td6">{(Math.round(coin.ask * 100) / 100).toFixed(2)}</td>
+                <td data-testid="td7">{(element.value * coin.ask).toFixed(2)}</td>
                 <td>Real</td>
                 <td>
                   <button
